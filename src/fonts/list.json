@@ -1,0 +1,7 @@
+[
+  { "value": "Nexa Bold", "label": "Nexa Bold" , "style" : {"fontFamily": "Nexa Bold"}},
+  { "value": "Helvetica", "label": "Helvetica" , "style" : {"fontFamily": "Helvetica"}},
+  { "value": "Times New Roman", "label": "Times New Roman", "style" : {"fontFamily": "Times New Roman"}}
+]
+
+
