@@ -18,6 +18,7 @@
     "react-onclickoutside": "^6.4.0",
     "react-scripts": "1.0.10",
     "react-select": "^1.0.0-rc.5"
+    
   },
   "scripts": {
     "start": "react-scripts start",
