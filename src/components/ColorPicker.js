@@ -1,9 +1,8 @@
 import React from 'react';
 import { TwitterPicker } from 'react-color';
-
+//Twitter Picker for color
 
 class ColorPickerMaa extends React.Component{
-
 
   constructor(props){
     super(props);

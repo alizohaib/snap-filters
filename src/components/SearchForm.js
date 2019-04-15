@@ -13,7 +13,6 @@ export default class SearchForm extends React.Component{
 	}
 
 	render(){
-
 		return(
 
 			<div className="search p bg-dark">

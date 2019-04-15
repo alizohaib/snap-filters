@@ -10,7 +10,6 @@ export default class TemplateListItem extends React.Component{
 		// Sanitised Text goes in this function
 		this.props.addToCanvas(this.props.sanitisedText);
 	}
-
 	render(){
 
 		return(

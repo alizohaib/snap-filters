@@ -7,7 +7,9 @@ import SearchForm from './components/SearchForm';
 // import { BlockPicker } from 'react-color';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Img from './img/img.png'
+import Img from './img/img.png';
+import ImageUpload from './components/ImageUpload';
+
 
 class App extends Component {
 
@@ -17,7 +19,8 @@ class App extends Component {
     this.state = {
       templates : [],
       loadingTemplates : true,
-      activeTemplate: null
+      activeTemplate: null,
+      activeImage: null,
     };
   }
 
@@ -29,8 +32,48 @@ class App extends Component {
 
   performSearch = (query = 'donkey') => {
 
-    axios.get(`https://www.pepperfilters.com/api/templates/All/10/0`)
+    axios.get(`https://www.pepperfilters.com/api/templates/All/2/0`)
       .then(response => {
+        
+        // const hey = response.data;
+        // let start = "https://pepperfilters.com";
+        // var count;
+        // hey.forEach( (element) => {
+        
+        //   // let link = document.createElement("a");
+        //   // link.href = start.concat(element.background_url) ;
+          
+        //   // link.download = "avatar.png";
+        //   // link.click();
+        //   // console.log(link);
+          
+        //   const innerelements = JSON.parse(element.serialized_content);
+        //   const innn = innerelements.objects;
+        //   innn.forEach( (inner_e) => {
+
+        //     const str = inner_e.src;
+        //     if(str && str.includes('hidden_template_items')){
+              
+
+        //       let link = document.createElement("a");
+        //       if( !str.includes('http') ){
+        //         link.href = start.concat(str);
+        //       }else{
+        //       link.href = str;
+        //       }
+        //       link.download = 'avatar.png';
+        //       link.click();
+
+        //       console.log(str);
+        //     }
+
+        //   } );
+
+
+        // });
+
+
+
         this.setState({
           templates : response.data,
           loadingTemplates: false
@@ -54,6 +97,9 @@ class App extends Component {
     // this.activeTemplate = the_thing;
     // console.log(this.activeTemplate);
     this.setState({activeTemplate: the_thing})    
+  }
+  addImagetoCanvas = (the_image) => {
+    this.setState({activeImage : the_image});
   }
 
   render() {
@@ -103,27 +149,30 @@ class App extends Component {
                     <ul className="nav nav-tabs nav-justified " role="tablist">
                       <li role="presentation" className="active "><a  href="#tab21" role="tab" data-toggle="tab" aria-expanded="true"><i className="fa fa-file" /> Templates</a></li>
                       <li role="presentation" className=""><a onClick = {this.something} href="#tab21" role="tab" data-toggle="tab" aria-expanded="false"><i className="fa fa-file-image-o" /> Graphics</a></li>
-                      <li role="presentation" className=""><a href="#tab23" role="tab" data-toggle="tab" aria-expanded="false"><i className="fa fa-bold" /> Text</a></li>
+                      <li role="presentation" className=""><a href="#tab23" role="tab" data-toggle="tab" aria-expanded="false"><i className="fa fa-bold" /> Upload</a></li>
                       
                     </ul>
                     
                     <SearchForm onSearch ={this.performSearch} />
 
+
                     <div className="post-options bg-dark dark">
-                    
+                      
+
+
                       <a href="#"><i className="glyphicon glyphicon-fire"></i> Trending <span className="badge badge-danger pull-right m-l-xs">NEW</span></a>
                       <a href="#"><i className="glyphicon glyphicon-flash"></i> Popular</a>
                       <a href="#"><i className="glyphicon glyphicon-gift"></i> Birthday</a>
                       <a href="#"><i className="glyphicon glyphicon-heart"></i> Wedding</a>
-                      
-
-
                     
+
                       
                     </div>
                     
 
                     <div className="tab-content bg-dark">
+
+                      
                       <div role="tabpanel" className="tab-pane fade active in" id="tab21">
                         
                         {
@@ -139,8 +188,11 @@ class App extends Component {
 
                       </div>
                       
+                      
+
                       <div role="tabpanel" className="tab-pane fade" id="tab23">
-                          <p>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.</p>
+                          <ImageUpload addToCanvas = {this.addImagetoCanvas}/>
+
                       </div>
                       
                     </div>
@@ -154,7 +206,11 @@ class App extends Component {
             </div>
 
             <div className="col-md-5">
-                <FabricCanvas template = {this.state.activeTemplate}/>
+                <FabricCanvas 
+                  template = {this.state.activeTemplate}
+                  image = {this.state.activeImage}
+
+                />
             </div>
 
           </div>
@@ -167,3 +223,5 @@ class App extends Component {
 }
 
 export default App;
+
+

@@ -13,8 +13,6 @@ import 'react-select/dist/react-select.css';
 
 class StylerComponent extends React.Component{
 
-
-
 	render(){
 		return (
 

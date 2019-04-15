@@ -20,8 +20,6 @@ import StylerComponent from './StylerComponent'
 ********************/
 
 
-
-
 // Global Canvas Variable
 var the_canvas;
  
@@ -111,12 +109,24 @@ class FabricCanvas extends React.Component{
 
 	componentWillReceiveProps = (newprops) =>{
 		
-		this.updateCanvas(newprops.template);
-		
+		if(newprops.image != this.props.image){
+			this.updateCanvasforImage(newprops.image);
+		}
+		if(newprops.template != this.props.template){
+			this.updateCanvas(newprops.template);
+		}
 	}
 
-	updateCanvas = (the_template) =>{
+	updateCanvasforImage = (the_image) => {
+		if(the_image){
+			fabric.Image.fromURL(the_image.preview, function(myImg) {
+ 				the_canvas.add(myImg); 
+			});
+		}
+	}
 
+
+	updateCanvas = (the_template) =>{
 
   			
   		if(the_template != null){
@@ -124,7 +134,6 @@ class FabricCanvas extends React.Component{
   			this.setState({isCanvasLoading: true}, () => {
   			if(the_template != null){
   				
-
   				
   				the_canvas.loadFromJSON(the_template.serialized_content, () => {
   					this.setState({isCanvasLoading :false});
@@ -139,8 +148,6 @@ class FabricCanvas extends React.Component{
 
   		
   	}
-
-
 
 
 	// Handle Events After Object Selection
