@@ -1,6 +1,7 @@
 import React from 'react';
 import {fabric} from 'fabric';
 import onClickOutside from 'react-onclickoutside'
+import {Button} from 'react-bootstrap';
 
 import StylerComponent from './StylerComponent'
 
@@ -34,17 +35,20 @@ class FabricCanvas extends React.Component{
 			// For Selected Object
 			selected_object : null, //Objec
 			isCanvasLoading: false,
+			// backgroundImage: './img/bg-canvas.png'
 
 		}
 		
 	}
-	
+
+
+
 	componentDidMount(){
 
 		// Make a New Canvas
 		the_canvas = new fabric.Canvas('main-canvas', {
-			height:490,
-			width:274,
+			height:604,
+			width:279,
 		});
 
 		// Customised Controls
@@ -117,6 +121,15 @@ class FabricCanvas extends React.Component{
 		}
 	}
 
+	saveToCanvas = () => {
+
+        let link = document.createElement("a");
+        link.href = the_canvas.toDataURL({format: 'png'});
+        link.download = "filter.png";
+        link.click();
+
+    }
+
 	updateCanvasforImage = (the_image) => {
 		if(the_image){
 			fabric.Image.fromURL(the_image.preview, function(myImg) {
@@ -134,10 +147,22 @@ class FabricCanvas extends React.Component{
   			this.setState({isCanvasLoading: true}, () => {
   			if(the_template != null){
   				
-  				
+  				// console.log(the_template.serialized_content["objects"])
+  				// console.log(the_template.serialized_content.objects)
+  				// console.log(the_template.preview)
+  				var aurl = 'http://pepperfilters.com' + the_template.background_url
+  				aurl = aurl.replace(/ /g,"%20");
+  				// aurl = encodeURIComponent(aurl.trim())
+  				// url = decodeURIComponent(url);
+  				console.log(aurl)
+
+  				this.setState({backgroundImage: aurl})
+
+
   				the_canvas.loadFromJSON(the_template.serialized_content, () => {
   					this.setState({isCanvasLoading :false});
-  					console.log(this.state.isCanvasLoading,'2');
+  					// console.log(this.state.isCanvasLoading,'2');
+  					
   				});
   				
   			}
@@ -380,6 +405,8 @@ class FabricCanvas extends React.Component{
 
   	}
 
+
+
   	
 
 	render(){
@@ -416,8 +443,12 @@ class FabricCanvas extends React.Component{
 				: null
 				}
 				
-				<canvas id= 'main-canvas'>
+				<canvas id= 'main-canvas' style={{backgroundImage: `url(${this.state.backgroundImage})` }} >
 				</canvas>
+				<br/><br/>
+				 <Button bsStyle="warning" onClick = {this.saveToCanvas} bsSize="large" block>
+                    Download Filter
+                  </Button>
 			</div>
 		);
 

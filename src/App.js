@@ -32,7 +32,7 @@ class App extends Component {
 
   performSearch = (query = 'donkey') => {
 
-    axios.get(`https://www.pepperfilters.com/api/templates/All/2/0`)
+    axios.get(`https://www.pepperfilters.com/api/templates/All/8/0`)
       .then(response => {
         
         // const hey = response.data;
@@ -96,9 +96,15 @@ class App extends Component {
 
     // this.activeTemplate = the_thing;
     // console.log(this.activeTemplate);
+    
+    console.log(the_thing)
+
+    // console.log(the_thing);
     this.setState({activeTemplate: the_thing})    
+    // console.log(this.state)
   }
   addImagetoCanvas = (the_image) => {
+
     this.setState({activeImage : the_image});
   }
 
@@ -106,7 +112,7 @@ class App extends Component {
     return (
       <div className="App">
         
-        <nav className="navbar navbar-inverse navbar-static-top">
+        <nav className="navbar navbar-static-top">
           <div className="container">
             <div className="navbar-header">
               <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -115,18 +121,18 @@ class App extends Component {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              <a className="navbar-brand" href="#">SnapDog</a>
+              <a className="navbar-brand" href="#" >
+
+                <img src="https://lensfilters.live/wp-content/uploads/2018/01/lensfilters-snapchat-augmented-reality-filter-lens-maker-2.png" />
+
+              </a>
+
             </div>
             <div id="navbar" className="navbar-collapse collapse">
               <ul className="nav navbar-nav">
-                <li className="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
                 
               </ul>
               <ul className="nav navbar-nav navbar-right">
-                <li><a href="../navbar/">Default</a></li>
-                <li className="active"><a href="./">Static top <span className="sr-only">(current)</span></a></li>
-                <li><a href="../navbar-fixed-top/">Fixed top</a></li>
               </ul>
             </div>
           </div>

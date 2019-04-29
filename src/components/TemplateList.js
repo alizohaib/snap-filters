@@ -8,7 +8,7 @@ export default class TemplateList extends React.Component{
 
 	render(){
 
-		console.log(this.props.data)
+		// console.log(this.props.data)
 		
 		const results = this.props.data;
 
